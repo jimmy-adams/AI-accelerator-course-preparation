@@ -49,7 +49,7 @@ Please check the [link](https://www.xilinx.com/support/download/index.html/conte
 2. Suggested version of Vivado® Design Suite is **2020.1**, which i used to design and verify the lab and code. It can not be guaranteed that the lab code can work on all the versions of suite.
 3. Strongly suggest reading the **release note** file under the documentation catalog, it will save your time for the platform preparation including the downloading, installation and the later licensing.
 
-![release_note](/home/jimmy/Pictures/release_note.png)
+<img src="Pictures/release_note.png" alt="release_note" style="zoom:100%;" />
 
 ## 1.3 Final installation and licensing
 
@@ -71,7 +71,7 @@ If you downloaded the lightweight installer, launch the downloaded file. You are
 **Note:** On Linux the file is a .bin file and can be launched by running ./<name of the file>.bin in the shell terminal, as can be seen in [Figure 1][Figure 1] .
 Please ensure that you have changed the file permissions to execute.
 
-![alt$=">"](/home/jimmy/Pictures/setup1.png  "Figure 1")
+![alt$=">"](Pictures/setup1.png  "Figure 1")
 
 ​                                                                         **Figure 1**
 
@@ -79,7 +79,7 @@ Please ensure that you have changed the file permissions to execute.
 
 Following the initializing of the installer, a welcome window will appear with the necessary information about the supported operating systems, shown in [Figure 2][setup3].
 
-![setup2](/home/jimmy/Pictures/setup2.png)
+![setup2](Pictures/setup2.png)
 
 ​                                                                          Figure 2
 
@@ -87,11 +87,7 @@ Following the initializing of the installer, a welcome window will appear with t
 
 Accept all the license agreement, otherwise the installation will not proceed, displayed in Figure 3.
 
-<img style="float: right;" src="/home/jimmy/Pictures/setup3.png">
-
-
-
-![setup3](/home/jimmy/Pictures/setup3.png)
+![setup3](Pictures/setup3.png)
 
 ​                                                                              Figure 3
 
@@ -99,7 +95,7 @@ Accept all the license agreement, otherwise the installation will not proceed, d
 
 Shown in Figure 4, take the Vivado product, including all the required toolkits and library. To experience the Machine learning and AIoT function, you can take the Vitis option, which also includes the Vivado Design Suite.
 
-![setup4](/home/jimmy/Pictures/setup4.png)
+![setup4](Pictures/setup4.png)
 
 ​                                                                             Figure 4
 
@@ -107,7 +103,7 @@ Shown in Figure 4, take the Vivado product, including all the required toolkits 
 
 Choose the Vivado HL System Edition.
 
-![setup5](/home/jimmy/Pictures/setup5.png)
+![setup5](Pictures/setup5.png)
 
 ​                                                                      Figure 5
 
@@ -115,7 +111,7 @@ Choose the Vivado HL System Edition.
 
 After the Edition version is set, the installer will display the available design tools for your reference. Here i suggest selecting all the tools and devices, shown in Figure 6.
 
-![setup7](/home/jimmy/Pictures/setup7.png)
+![setup7](Pictures/setup7.png)
 
 ​                                                                             Figure 6
 
@@ -123,7 +119,7 @@ After the Edition version is set, the installer will display the available desig
 
 Choose the installation location.
 
-![setup8](/home/jimmy/Pictures/setup8.png)
+![setup8](Pictures/setup8.png)
 
 ​                                                                                   Figure 7
 
@@ -131,11 +127,11 @@ Choose the installation location.
 
 Finally the installation will automatically progress and logically it will succeed. If not, the problem might link to the disk room for storage and processing or the system's compatibility.
 
-![installation](/home/jimmy/Pictures/installation.png 'aaas')
+![installation](Pictures/installation.png 'aaas')
 
 ​                                                                                 Figure 8
 
-![Alt textaaaaas](/home/jimmy/Pictures/installation.png "Optional title") 
+![Alt textaaaaas](Pictures/installation.png "Optional title") 
 
 
 
@@ -147,19 +143,19 @@ Xilinx charges for IP design and software and profits from the business. Current
 
 After your first time successful installation, the Vivado license manager will appear,displayed in Figure 9. It shows the information about the license getting and the current license status.
 
-![licensing1](/home/jimmy/Pictures/licensing1.png)
+![licensing1](Pictures/licensing1.png)
 
 
 
 Click the **obtain license** part on the left side, choose the second option **Get Vivado or IP Evalution Licenses**, you will have 30 days' free use of Vivado Design Suite. And confirm with clicking the **Connect Now**. 
 
-![licensing2](/home/jimmy/Pictures/licensing2.png)
+![licensing2](Pictures/licensing2.png)
 
 
 
 The program will ask you to sign in with your pre-registered user information, including e-mail address and password.
 
-![licensing3](/home/jimmy/Pictures/licensing3.png)
+![licensing3](Pictures/licensing3.png)
 
 
 
@@ -167,21 +163,21 @@ The program will ask you to sign in with your pre-registered user information, i
 
 After successful login or signup, you will see a list of certificate based licenses, shown in Figure . Find the Vivado HLS Evalution Evalution, select it and confirm the generation. The license with file name **Xilinx.lic** will be downloaded to you local computer.
 
-![lincensing5](/home/jimmy/Pictures/lincensing5.png)
+![lincensing5](Pictures/lincensing5.png)
 
-![licensing4](/home/jimmy/Pictures/licensing4.png)
+![licensing4](Pictures/licensing4.png)
 
 
 
 Shown in Figure , **Load license** with the selected license file in your local machine. The License manager will verify the file to check the credential. If the verification passed, the license status window will show the license's detail.
 
-![licensing6](/home/jimmy/Pictures/licensing6.png)
+![licensing6](Pictures/licensing6.png)
 
 
 
 
 
-![licensing1](/home/jimmy/Pictures/licensing1.png)
+![licensing1](Pictures/licensing1.png)
 
 ​                                                                               Figure 9
 
@@ -203,7 +199,7 @@ This part of the documentation gives a step by step instruction about how to cre
 
 Shown in Figure A typical design flow consists of model(s) creating, user constraint creating file(s), Vivado project creating, the created models importing, assigning created constraint file(s), optionally running behavioral simulation, synthesizing the design, implementing the design, generating the bitstream, and finally verifying the functionality in the hardware by downloading the generated bitstream file.
 
-![Design_flow](/home/jimmy/Pictures/Design_flow.png)
+![Design_flow](Pictures/Design_flow.png)
 
 
 
@@ -236,7 +232,30 @@ endmodule
     
 ```
 
-The first line ``timescale 1ns / 1ps` defines the timescale directive specifies the time unit and precision for the modules for the later functional and timing simulaton. Please note: it has no effect on the **synthesis** and also **hardware implementation**.
+1. The first line ``timescale 1ns / 1ps` defines the timescale directive specifies the time unit and precision for the modules for the later functional and timing simulaton. Please note: it has no effect on the **synthesis** and also **hardware implementation**.
+
+```verilog
+module lab1()
+   /*main content*/
+endmodule
+```
+
+2. The `module` and `endmodule` defines the beginning and end of a module.
+
+```verilog
+input [7:0] swt,
+output [7:0] led
+```
+
+3. The input and output define the I/O port of the module, `[7:0]` is the length of data array passing through the port, for example `0x00101011`. 
+4. The follow part defines the logical relationship between the input **swt** and the output **led**. The first bit of the output,**led[0]**, is linked with the value of the first bit of the input, **swt[0]** with **assign**. `~` in the verilog code is the bitwise operator for negation.
+5.  `&` and `|` are also the bitwise operator working as AND and OR logics. 
+
+After the code detail explanation, we can get a functional circuit with the output array of **led** control by the input **swt**. To get out of the abstract description, we can use RTL analysis to 
+
+
+
+
 
 To validate the performance of the module, a testbench script file is needed.
 
