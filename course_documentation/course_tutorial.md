@@ -1,9 +1,30 @@
+* [AI-accelerator-course-preparation tutorial](#ai-accelerator-course-preparation-tutorial)
+   * [1.1 Vivado® Design Suite](#11-vivado-design-suite)
+      * [Introduction](#introduction)
+      * [Component](#component)
+         * [Vivado High-Level Synthesis compiler](#vivado-high-level-synthesis-compiler)
+         * [Vivado Simulator](#vivado-simulator)
+         * [Vivado IP Integrator](#vivado-ip-integrator)
+         * [Vivado Tcl Store](#vivado-tcl-store)
+   * [1.2 Resource downloading](#12-resource-downloading)
+   * [1.3 Final installation and licensing](#13-final-installation-and-licensing)
+      * [Windows version](#windows-version)
+      * [Linux version](#linux-version)
+         * [Licensing](#licensing)
+   * [Design Flow](#design-flow)
+   * [Testbench](#testbench)
+
+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
+
 # AI-accelerator-course-preparation tutorial
+
 <div style="page-break-after: always;"></div>
 [TOC]
 
 
 <div style="page-break-after: always;"></div>
+
+
 # Lab 1 Software platform Description
 
 This part of the documentation provides an introduction for fresh users about how to install the Vivado® Design Suite on Windows or Linux OS(operating system).
@@ -137,11 +158,11 @@ Finally the installation will automatically progress and logically it will succe
 
 
 
-#### Licensing
+### Licensing
 
 Xilinx charges for IP design and software and profits from the business. Currently, you can have one month's trial free of charge with your registered information.
 
-After your first time successful installation, the Vivado license manager will appear,displayed in Figure 9. It shows the information about the license getting and the current license status.
+After completing the installation of  Vivado, SDx or ISE Design Suite, the Xilinx License Configuration  Manager (XCLM) will start automatically and guide you through the  licensing process,displayed in Figure 9. You may also go directly to the [Xilinx Product Licensing Site](https://www.xilinx.com/getlicense.html) to obtain licenses for free or evaluation products if you decided to skip this step during product installation.
 
 ![licensing1](Pictures/licensing1.png)
 
@@ -205,9 +226,43 @@ Shown in Figure A typical design flow consists of model(s) creating, user constr
 
 xczu29dr-fsvf1760-1L-i
 
-We can see the layout of the project platform. In the **source** window, we can find the verilog code for lab2 project, lab1(In the first lab there is not lab exercise). double click it and check the code, which is also pasted below. 
+### Project creating
 
-The first verilog sample code with comment is listed below:
+Figure to Figure is the new project, lab2's creating process. You can locate the project on the **vivado_lab** folder, which is provided and can be downloaded from the github.
+
+![lab2_1](/home/jimmy/Pictures/lab2_1.png)
+
+
+
+Choose RTL project as the project type.
+
+![lab2_3](/home/jimmy/Pictures/lab2_3.png)
+
+After the type selection, decide the board part.
+
+![lab2_4](/home/jimmy/Pictures/lab2_4.png)
+
+We can see the layout of the project platform and the sources hierachy. 
+
+![lab2_layout](/home/jimmy/Pictures/lab2_layout.png)
+
+![lab2_14](/home/jimmy/Pictures/lab2_14.png)
+
+
+
+
+
+### Source Adding
+
+![lab2_13](/home/jimmy/Pictures/lab2_13.png)
+
+![lab2_6](/home/jimmy/Pictures/lab2_6.png)
+
+
+
+
+
+In the **source** window, we can find the verilog code for lab2 project. double click it and check the code, which is also pasted below. 
 
 ```verilog
 `timescale 1ns / 1ps
@@ -216,7 +271,7 @@ The first verilog sample code with comment is listed below:
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module lab1(
+module lab2(
     input [7:0] swt,
     output [7:0] led
     );
@@ -235,7 +290,7 @@ endmodule
 1. The first line ``timescale 1ns / 1ps` defines the timescale directive specifies the time unit and precision for the modules for the later functional and timing simulaton. Please note: it has no effect on the **synthesis** and also **hardware implementation**.
 
 ```verilog
-module lab1()
+module lab2()
    /*main content*/
 endmodule
 ```
@@ -249,9 +304,15 @@ output [7:0] led
 
 3. The input and output define the I/O port of the module, `[7:0]` is the length of data array passing through the port, for example `0x00101011`. 
 4. The follow part defines the logical relationship between the input **swt** and the output **led**. The first bit of the output,**led[0]**, is linked with the value of the first bit of the input, **swt[0]** with **assign**. `~` in the verilog code is the bitwise operator for negation.
-5.  `&` and `|` are also the bitwise operator working as AND and OR logics. 
+5. `&` and `|` are also the bitwise operator working as AND and OR logics. 
 
-After the code detail explanation, we can get a functional circuit with the output array of **led** control by the input **swt**. To get out of the abstract description, we can use RTL analysis to 
+### RTL Analysis
+
+After the code detail explanation, we can get a functional circuit with the output array of **led** control by the input **swt**. To get out of the abstract description, we can use RTL analysis to get the schematic drawing for the logic circuit, shown in .
+
+![lab2_schematics](/home/jimmy/Pictures/lab2_schematics.png)
+
+
 
 
 
@@ -263,12 +324,139 @@ To validate the performance of the module, a testbench script file is needed.
 
 ## Testbench
 
-Vivado can display the waveform with the set clock and time ferequency.
+Testbench is a program or model written in any language for the purposes of exercising and verifying the functional correctness of a hardware model during the simulation.
 
-You can check yourself whether the result is the same.
+Add the testbench verilog file into the source as the create simulation sources.
+
+![lab2_12](/home/jimmy/Pictures/lab2_12.png)
+
+ ![lab2_13](/home/jimmy/Pictures/lab2_13.png)
+
+Below is the code block for your reference.
+
+```verilog
+`timescale 1ns / 1ps
+/////////////////////////////////////////////////////////////////
+// Module Name: lab1_tb
+/////////////////////////////////////////////////////////////////
+module lab2_tb(
+
+    );
+    
+    reg [7:0] switches;
+    wire [7:0] leds;
+    reg [7:0] e_led;
+    
+    integer i;
+    
+    lab2 dut(.led(leds),.swt(switches));
+ 
+    function [7:0] expected_led;
+       input [7:0] swt;
+    begin      
+       expected_led[0] = ~swt[0];
+       expected_led[1] = swt[1] & ~swt[2];
+       expected_led[3] = swt[2] & swt[3];
+       expected_led[2] = expected_led[1] | expected_led[3];
+       expected_led[7:4] = swt[7:4];
+    end   
+    endfunction   
+    
+    initial
+    begin
+        for (i=0; i < 255; i=i+2)
+        begin
+            #50 switches=i;
+            #10 e_led = expected_led(switches);
+            if(leds == e_led)
+                $display("LED output matched at", $time);
+            else
+                $display("LED output mis-matched at ",$time,": expected: %b, actual: %b", e_led, leds);
+        end
+    end
+      
+endmodule
+```
+
+### Timescale definition and variable declaration
+
+```verilog
+`timescale 1ns / 1ps
+
+reg [7:0] switches;
+wire [7:0] leds;
+reg [7:0] e_led;
+integer i;
+```
+
+Comparing with the functional model module, the Testbench module usually has no port. And in the first part, the Testbench defines the variables for future references and assignments.
+
+### DUT Instantiating
+
+```verilog
+lab2 dut(.led(leds),.swt(switches));
+```
+
+Following the variables' definition, the Testbench instantiating a DUT(Design Under Design), which is the duplicates of the functional module waiting to be tested(in our project, the function module is **lab2**). and DUT regulates that the input variable must be **reg** type, and the output the **wire** type, because the **reg** type can be assigned with value, while **wire** type can not.
+
+### Generating clock
+
+```verilog
+initial
+    begin
+        for (i=0; i < 255; i=i+2)
+        begin
+            #50 switches=i;
+            #10 e_led = expected_led(switches);
+            if(leds == e_led)
+                $display("LED output matched at", $time);
+            else
+                $display("LED output mis-matched at ",$time,": expected: %b, actual: %b", e_led, leds);
+        end
+    end
+```
+
+This Testbench program uses a for loop to counter the frequency or clocks of running. `#50` and `#10` are the delay controls the for-loop used to generate the signal. 
+
+In between the clock generating and DUT instantiating, the program starts another function block to repeat the logic of the lab2 circuit and the link the **swt** with output **expected_led**. 
+
+```verilog
+function [7:0] expected_led;
+       input [7:0] swt;
+    begin      
+       expected_led[0] = ~swt[0];
+       expected_led[1] = swt[1] & ~swt[2];
+       expected_led[3] = swt[2] & swt[3];
+       expected_led[2] = expected_led[1] | expected_led[3];
+       expected_led[7:4] = swt[7:4];
+    end   
+    endfunction 
+```
+
+The value of **expected_led** will be used to compare with the DUT output to check the correctness of the lab2 function. The result will be published with `$display()` function on the **Tcl concole**.
+
+### Simulation
+
+![lab2_16](/home/jimmy/Pictures/lab2_16.png)
+
+To verify the logic function's correctness, the waveform generator from simulation also can provide the result.
+
+![lab2_wave](/home/jimmy/Pictures/lab2_wave.png)
 
 
+
+## Lab Task(u)
+
+Please generate the waveform with Vivado Design Suite, and store it with the form 
 
 
 <div style="page-break-after: always;"></div>
 # Lab 3 MAC
+
+Multiplex
+
+Add
+
+
+
+Matrix
