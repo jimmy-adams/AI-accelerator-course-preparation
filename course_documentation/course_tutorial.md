@@ -1,19 +1,3 @@
-* [AI-accelerator-course-preparation tutorial](#ai-accelerator-course-preparation-tutorial)
-   * [1.1 Vivado® Design Suite](#11-vivado-design-suite)
-      * [Introduction](#introduction)
-      * [Component](#component)
-         * [Vivado High-Level Synthesis compiler](#vivado-high-level-synthesis-compiler)
-         * [Vivado Simulator](#vivado-simulator)
-         * [Vivado IP Integrator](#vivado-ip-integrator)
-         * [Vivado Tcl Store](#vivado-tcl-store)
-   * [1.2 Resource downloading](#12-resource-downloading)
-   * [1.3 Final installation and licensing](#13-final-installation-and-licensing)
-      * [Windows version](#windows-version)
-      * [Linux version](#linux-version)
-         * [Licensing](#licensing)
-   * [Design Flow](#design-flow)
-   * [Testbench](#testbench)
-
 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
 
 # AI-accelerator-course-preparation tutorial
