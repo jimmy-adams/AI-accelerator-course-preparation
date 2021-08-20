@@ -60,9 +60,31 @@ Please check the [link](https://www.xilinx.com/support/download/index.html/conte
 
 After successful downloading of Vivado® Design Suite installer, it can be ready for installation. Please check the **release note** again to make sure your OS version can support the downloaded Vivado® Design Suite installer.
 
+Here the documentation for Windows and Linux Ubuntu based installation instruction, you can choose from it, and skip another OS's description.
+
 ### Windows version
 
 If you downloaded the lightweight installer, launch the downloaded file. You are prompted to log in and use your regular Xilinx login credentials to continue with the installation process.
+
+
+
+<img src="/home/jimmy/AI-accelerator-course-preparation/course_documentation/Pictures/window1.jpg" alt="window1" style="zoom:80%;" />
+
+
+
+<img src="/home/jimmy/AI-accelerator-course-preparation/course_documentation/Pictures/window2.jpg" alt="window2" style="zoom:80%;position:center" />
+
+<img src="/home/jimmy/AI-accelerator-course-preparation/course_documentation/Pictures/window3.jpg" alt="window3" style="zoom:80%;" />
+
+<img src="/home/jimmy/AI-accelerator-course-preparation/course_documentation/Pictures/window4.jpg" alt="window4" style="zoom:80%;" />
+
+<img src="/home/jimmy/AI-accelerator-course-preparation/course_documentation/Pictures/window5.jpg" alt="window5" style="zoom:80%;" />
+
+<img src="/home/jimmy/AI-accelerator-course-preparation/course_documentation/Pictures/window6.jpg" alt="window6" style="zoom:80%;" />
+
+<img src="/home/jimmy/AI-accelerator-course-preparation/course_documentation/Pictures/window7.jpg" alt="window7" style="zoom:80%;" />
+
+<img src="/home/jimmy/AI-accelerator-course-preparation/course_documentation/Pictures/window8.jpg" alt="window8" style="zoom:80%;" />
 
 ### Linux version
 
@@ -200,7 +222,7 @@ Maybe there are students who are not familiar with Verilog and VHDL, two popular
 
 This part of the documentation gives a step by step instruction about how to create a project and verify the result. It is expected the users can learn how to create a simple digital circuit using Verilog HDL and finish the synthesis and generate the bitstream for the designated hardware.
 
-## Design Flow
+## 2.1 Design Flow
 
 Shown in Figure A typical design flow consists of model(s) creating, user constraint creating file(s), Vivado project creating, the created models importing, assigning created constraint file(s), optionally running behavioral simulation, synthesizing the design, implementing the design, generating the bitstream, and finally verifying the functionality in the hardware by downloading the generated bitstream file.
 
@@ -306,7 +328,7 @@ To validate the performance of the module, a testbench script file is needed.
 
 
 
-## Testbench
+## 2.2 Testbench
 
 Testbench is a program or model written in any language for the purposes of exercising and verifying the functional correctness of a hardware model during the simulation.
 
@@ -429,13 +451,113 @@ To verify the logic function's correctness, the waveform generator from simulati
 
 
 
-## Lab Task(u)
+## 2.3 Lab Task(u)
 
-Please generate the waveform with Vivado Design Suite, and store it with the form 
+1. Please generate the waveform with Vivado Design Suite, and store it with the form **wcfg**.
+
+2. Realize the logic function of 
+
+   2.1. 
+
+   2.2. Please generate the waveform with Vivado Design Suite, and store it with the form **wcfg**
 
 
 <div style="page-break-after: always;"></div>
-# Lab 3 MAC
+# Lab 3 Convolutional Layer
+
+### 3.1 Introduction
+
+#### What is **convolution**? 
+
+Convolution is function that outputs an integral that expresses the amount of **overlap** of one function *g* as it is shifted over another function *f*. It therefore "blends" one function with another. For example, in synthesis imaging, the measured dirty map is a convolution of the "true" CLEAN map with the dirty beam (the [Fourier transform](https://mathworld.wolfram.com/FourierTransform.html) of the sampling distribution). 
+
+##### Linear formula
+
+In mathematics, a convolution is defined as a product of functions *f* and *g* that are objects in the algebra of [Schwartz functions](https://mathworld.wolfram.com/SchwartzFunction.html) in ![R^n](https://mathworld.wolfram.com/images/equations/Convolution/Inline5.gif). Convolution of two functions *f(t)* and *g(t)* over a finite range $[0,t]$ is given by
+$$
+f * g = \int_{-\infty}^{+\infty}{f(\tau)g(t-\tau)}d\tau\\
+      = \int_{-\infty}^{+\infty}{g(\tau)f(t-\tau)}d\tau
+$$
+​                                                                       ***Formula 1***
+
+And the convolution $f*g$​ can also be expressed as $f\otimes g$​​​ .
+
+##### Discrete formula
+
+In many engineering fields, such as the computer science, the input signals come with the discrete form. Convolution of two discrete functions *x(n)* and *h(n)* over a finite count *i* is given by
+$$
+x * h = \sum_{i=-\infty}^{\infty}{x(i)h(n-i)}\\
+      = \sum_{i=-\infty}^{\infty}{h(i)f(n-i)}
+$$
+​                                                                      ***Formula 2***
+
+**2 Dimensional formula**
+
+The 2-D Convolution computes the two-dimensional convolution of two input 2-D arrays, in another word, matrix .  Assume that *matrix A* has dimensions $(M_a,N_a)$and matrix B has dimensions $(M_b,N_b)$. When the convolution calculates the full output size, the equation for the 2-D discrete convolution is:
+$$
+C(i,j)=\sum_{m=0}^{M_a -1}\sum_{n=0}^{N_a-1}{A(m,n)∗B(i−m,j−n)}
+$$
+​                                                                      ***Formula 3***
+
+#### Convolution in Image Processing
+
+In image processing, convolutional filtering can be used to implement algorithms such as edge detection, image sharpening, and image blurring.
+
+With the convolution process, many important  features  can  be  extracted  from  the  edges  of  an  image  (e.g.,  corners, lines, curves). The feature can later be used for further deep learning training or traditional computer vision object recognition and tracking. 
+
+##### edge1
+
+In image process, Features which distinguish them from the surrounding display the color intensity change.
+
+### 3.2 Task(U)
+
+In this lab, we plan to build with **Verilog** based on Vivado Design Suite to realize a 3 by 3 matrix's convolutional operation.
+
+Imagine ***Matrix A*** is the pixel value for the upper left corner
+$$
+A= \left[\matrix{
+3 & 3 & 1\\
+0 & 1 & 0\\
+1 & 4 & 2
+}\right]
+$$
+Matrix B is the image kernel for convolution 
+$$
+B= \left[\matrix{
+3 & 1 & 2\\
+2 & 0 & 2\\
+1 & 1 & 2
+}\right]
+$$
+
+
+Following the *Formula 3* above, $A*B$​ can be separated into two parts:
+
+1. Element-wise Multiplication
+   $$
+   M11 = A_{11} * B_{11},M12 = A_{12} * B_{12},M13 = A_{13} * B_{13};\\
+   M21 = A_{21} * B_{21},M22 = A_{22} * B_{22},M23 = A_{23} * B_{23};\\
+   M31 = A_{31} * B_{31},M32 = A_{32} * B_{32},M33 = A_{33} * B_{33};
+   $$
+
+2. Summation of the multiplication
+
+   ​                                         $S = M_{11} + M_{12} + M_{13}+M_{21}+M_{22}+M_{23}+M_{31}+M_{32}+M_{33}$
+
+
+
+Hint
+
+1. Vivado Design Suite has already provided functional IPs for use, such as the **RAM** or **ROM** for memory reading and writing, **Adder** for mathematical adding and **Multiplier** for multiplication. Of course you can also build your own IP module with verilog and Vivado, this is encouraged.
+
+2. As is known in the lectures, the convolution layer in deep learning or machine learning in effect is the result of continous convolution between matrixs. To accelerate the computing, please take parallel computing in consideration, and take use of the advantage of  Xilinx FPGA's reconfigurable hardware to realize it.
+3. FSM(Finite State Machine) or Behavioral Tree can be used to create case-based function flow, which helps the project management.
+
+
+
+
+
+MAC
 
 Multiplex
 
