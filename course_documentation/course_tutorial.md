@@ -3,7 +3,7 @@
 
 
 ```
-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
+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
 ```
 
 # AI-accelerator-course-preparation tutorial
