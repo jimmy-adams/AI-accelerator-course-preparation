@@ -1,0 +1,1 @@
+set_property SRC_FILE_INFO {cfile:/home/jimmy/Downloads/vivado_lab/lab2/lab2.srcs/constrs_1/imports/lab2/lab2_nexys4_ddr.xdc rfile:../../../../../lab2.srcs/constrs_1/imports/lab2/lab2_nexys4_ddr.xdc id:1} [current_design]

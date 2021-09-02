@@ -1,0 +1,1 @@
+`define con_type1 5 

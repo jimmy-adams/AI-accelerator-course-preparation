@@ -1,0 +1,80 @@
+Copyright 1986-2020 Xilinx, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2020.1 (lin64) Build 2902540 Wed May 27 19:54:35 MDT 2020
+| Date         : Thu Aug 19 13:07:26 2021
+| Host         : jimmy-VirtualBox running 64-bit Ubuntu 18.04.4 LTS
+| Command      : report_drc -file lab2_drc_opted.rpt -pb lab2_drc_opted.pb -rpx lab2_drc_opted.rpx
+| Design       : lab2
+| Device       : xczu9eg-ffvb1156-2-e
+| Speed File   : -2
+| Design State : Synthesized
+---------------------------------------------------------------------------------------------------
+
+Report DRC
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: checkpoint_lab2
+      Design limits: <entire design considered>
+           Ruledeck: default
+             Max violations: <unlimited>
+             Violations found: 6
++----------+------------------+----------------------------+------------+
+| Rule     | Severity         | Description                | Violations |
++----------+------------------+----------------------------+------------+
+| BIVB-1   | Error            | Bank IO standard Support   | 2          |
+| PLCK-87  | Error            | Clock Placer Checks        | 1          |
+| PLHDIO-5 | Error            | HDIO DRC Checks            | 1          |
+| NSTD-1   | Critical Warning | Unspecified I/O Standard   | 1          |
+| UCIO-1   | Critical Warning | Unconstrained Logical Port | 1          |
++----------+------------------+----------------------------+------------+
+
+2. REPORT DETAILS
+-----------------
+BIVB-1#1 Error
+Bank IO standard Support  - IOBank:67
+Bank 67 has incompatible IO(s) because: The LVCMOS33 I/O standard is not supported for banks of type High Performance.  Move the following ports or change their properties:  
+led[1]
+Related violations: <none>
+
+BIVB-1#2 Error
+Bank IO standard Support  - IOBank:67
+Bank 67 has incompatible IO(s) because: The LVCMOS33 I/O standard is not supported for banks of type High Performance.  Move the following ports or change their properties:  
+swt[1], swt[2] and swt[7]
+Related violations: <none>
+
+PLCK-87#1 Error
+Clock Placer Checks  
+IO/clock placer failed to collectively place all IOs and clock instances. This is likely due to design requirements or user constraints specified in the constraint file such as IO standards, bank/voltage/DCI/VREF specifications, together with the part and package being used for the implementation. Please check the above for any possible conflicts.
+
+Related violations: <none>
+
+PLHDIO-5#1 Error
+HDIO DRC Checks  
+The following IO terminals need to be placed in HIGH_DENSITY IO banks (based on their IO standards), but they are incorrectly locked to non-HIGH_DENSITY IO banks. Please review and update the LOC constraints:
+led[1]
+swt[1]
+swt[2]
+swt[7]
+
+Related violations: <none>
+
+NSTD-1#1 Critical Warning
+Unspecified I/O Standard  
+10 out of 16 logical ports use I/O standard (IOSTANDARD) value 'DEFAULT', instead of a user assigned specific value. This may cause I/O contention or incompatibility with the board power or connectivity affecting performance, signal integrity or in extreme cases cause damage to the device or the components to which it is connected. To correct this violation, specify all I/O standards. This design will fail to generate a bitstream unless all logical ports have a user specified I/O standard value defined. To allow bitstream creation with unspecified I/O standard values (not recommended), use this command: set_property SEVERITY {Warning} [get_drc_checks NSTD-1].  NOTE: When using the Vivado Runs infrastructure (e.g. launch_runs Tcl command), add this command to a .tcl file and add that file as a pre-hook for write_bitstream step for the implementation run. Problem ports: led[7], led[6], led[5], led[4], led[3], led[2], swt[6], swt[5], swt[4],
+swt[3].
+Related violations: <none>
+
+UCIO-1#1 Critical Warning
+Unconstrained Logical Port  
+10 out of 16 logical ports have no user assigned specific location constraint (LOC). This may cause I/O contention or incompatibility with the board power or connectivity affecting performance, signal integrity or in extreme cases cause damage to the device or the components to which it is connected. To correct this violation, specify all pin locations. This design will fail to generate a bitstream unless all logical ports have a user specified site LOC constraint defined.  To allow bitstream creation with unspecified pin locations (not recommended), use this command: set_property SEVERITY {Warning} [get_drc_checks UCIO-1].  NOTE: When using the Vivado Runs infrastructure (e.g. launch_runs Tcl command), add this command to a .tcl file and add that file as a pre-hook for write_bitstream step for the implementation run.  Problem ports: led[7], led[6], led[5], led[4], led[3], led[2], swt[6], swt[5], swt[4],
+swt[3].
+Related violations: <none>
+
+
